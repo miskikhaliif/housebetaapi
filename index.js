@@ -15,8 +15,7 @@ app.use(expres.json())
 
 const dbconnect = require('./connection')
 dbconnect()
-
-app.get('',async(req,res)=>{
+app.get('/',async(req,res)=>{
     res.json("hiii")
 })
 app.use(cors())
