@@ -6,7 +6,7 @@ const aboutmodel = require ('../schema/about_schema')
 
 //get
 try {
-    about.get('',async(req,res)=>{
+    about.get('/',async(req,res)=>{
         const getabout = await aboutmodel.find()
         res.status(200).send(getabout)
     })
