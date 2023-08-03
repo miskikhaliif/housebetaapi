@@ -20,7 +20,7 @@ app.get('/',async(req,res)=>{
 })
 app.use(cors())
 app.listen(500,async()=>{
-    console.log("port is running")
+    console.log("port is  running")
 })
 const guryoos  = require('./route/house_route')
 const images=require('./route/image_route')
