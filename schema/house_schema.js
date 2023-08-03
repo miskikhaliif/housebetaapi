@@ -14,7 +14,7 @@ const guryoSchema = new mongoose.Schema({
     bathrooms:{type:String, required:true },
     masterRoom:{type:String,default:"yes", enum:["yes","no"]},
     faahfahin:{type:String, required:true },
-    user:{type:String, required:true },
+    owner:{type:String, required:true },
 
     
 },{timestamps:true})
