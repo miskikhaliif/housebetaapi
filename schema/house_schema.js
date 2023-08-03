@@ -12,7 +12,7 @@ const guryoSchema = new mongoose.Schema({
     isAvailable:{type:String, default:"yes", enum:["yes","no"]},
     rooms:{type:String, required:true },
     bathrooms:{type:String, required:true },
-    masterRoom:{type:String,default:"yes", enum:["yes","no"]},
+    masterRoom:{type:String,required:true},
     faahfahin:{type:String, required:true },
     owner:{type:String, required:true },
 
