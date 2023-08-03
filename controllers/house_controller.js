@@ -21,7 +21,8 @@ const guryvalidate = (guryodata)=>{
         area:Joi.string().required(),
         address:Joi.string().required(),
         age:Joi.number().required(),
-        deposit:Joi.string().required(),
+        deposit_Amount:Joi.string().required(),
+        rent_Amount:Joi.string().required(),
         parking:Joi.string().required(),
         imagePreview:Joi.string().required(),
         isAvailable:Joi.string().required(),
@@ -29,7 +30,7 @@ const guryvalidate = (guryodata)=>{
         bathrooms:Joi.string().required(),
         masterRoom:Joi.string().required(),
         faahfahin:Joi.string().required(),
-        user:Joi.string().required()
+        owner:Joi.string().required()
     })
     return guryyos.validate(guryodata)
 }
