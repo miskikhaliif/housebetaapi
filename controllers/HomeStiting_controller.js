@@ -6,8 +6,14 @@ const homestitingmodel =require('../schema/HomeStiting_schema')
 
 //get
  const gethome =async(req,res)=>{
-    const gethome =await homestitingmodel.find()
-    res.json(gethome)
+    try {
+        const gethome =await homestitingmodel.find().sort({_id: -1 }).limit(1);
+        res.json(gethome)
+        res.status(200).send(getoenhome)
+    } catch (error) {
+        res.status(400).send(error.message)
+    }
+   
 }
 
 
@@ -39,45 +45,62 @@ const homesvalidate = (homeStdata) =>{
         if(error){
             return res.json(error.message)
         }
-         const posthome = await homestitingmodel(req.body)
-        await posthome.save()
-        res.status(200).send({message:"sucessfully posted"})
+        const gethomedat = await homestitingmodel.find().sort({_id: -1}).limit(1);
+        if(gethomedat){
+        const updatehome =await homestitingmodel.findByIdAndUpdate(
+            gethomedat[0]._id,
+            {
+                Title:req.body.Title,
+                Logo:req.body.Logo,
+                Name:req.body.Name,
+                address:req.body.address, 
+                email:req.body.email,
+                phone:req.body.phone, 
+                whatapp:req.body.whatapp,
+                Facebook:req.body.Facebook, 
+               Instagram:req.body.Instagram,
+                tiktok:req.body.tiktok,
+               Herotitle:req.body.Herotitle,
+              HeroDiscritpion:req.body.HeroDiscritpion,
+              HerImage:req.body.HerImage,
+               Footertext:req.body.Footertext
+            },
+            {new: true}
+        );
+        res.status(200).send({updatehome});
+        }else{
+            const posthome = await homestitingmodel(req.body)
+            await posthome.save()
+            res.status(200).send({message:"sucessfully posted"})
+        }
+    } catch (error) {
+        res.status(400).send(error.message)
+        }
+        }
+
+
+//delete
+    const deletehome =async(req,res)=>{
+        try {
+        const homeid = req.params.id
+        const delhome = await homestitingmodel.findByIdAndDelete(homeid)
+        res.status(200).send({message:"deleted"})
     
 } catch (error) {
     res.status(400).send(error.message)
 }
-
-    }
-//put
-try {
-    homestiting.put('/:id',async(req,res)=>{
-        const hid = req.params.id
-        const puthome = await homestitingmodel.findByIdAndUpdate(hid,req.body,{new:true})
-        res.status(200).send({message:"updated"})
-    })
-} catch (error) {
-    res.status(400).send(error.message)
-}
-//delete
-try {
-    homestiting.delete('/:id',async(req,res)=>{
-        const homeid = req.params.id
-        const delhome = await homestitingmodel.findByIdAndDelete(homeid)
-        res.status(200).send({message:"deleted"})
-    })
-} catch (error) {
-    res.status(400).send(error.message)
 }
 //getid
-try {
-    homestiting.get('/:id',async(req,res)=>{
+
+   const getbyidhome =async(req,res)=>{
+        try {
         const hoem= req.params.id
         const getoenhome = await homestitingmodel.findById(hoem)
         res.status(200).send(getoenhome)
-    })
 } catch (error) {
     res.status(400).send(error.message)
 }
+    }
 
 
-module.exports=homestiting;
+module.exports={getbyidhome,gethome,posthoem,deletehome};

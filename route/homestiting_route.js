@@ -1,11 +1,10 @@
 const express =require ('express')
 const homestitings = express.Router();
-const homestiting =require('../controllers/HomeStiting_controller')
+const {gethome,getbyidhome,posthoem,deletehome} =require('../controllers/HomeStiting_controller')
 
-homestitings.get('/',homestiting)
-homestitings.get('/:id',homestiting)
-homestitings.post('/',homestiting)
-homestitings.put('/:id',homestiting)
-homestitings.delete('/:id',homestiting)
+homestitings.get('/',gethome)
+homestitings.get('/:id',getbyidhome)
+homestitings.post('/',posthoem)
+homestitings.delete('/:id',deletehome)
 
 module.exports=homestitings;
