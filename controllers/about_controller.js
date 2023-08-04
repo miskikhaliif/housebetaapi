@@ -8,7 +8,7 @@ const aboutmodel = require ('../schema/about_schema')
 
     const aboutget = async (req,res)=>{
         try {
-        const getabout = await aboutmodel.find().sort({_id: -1 }).limit(1);
+        const getabout = await aboutmodel.find().sort({'_id': -1 }).limit(1);
         res.status(200).send(getabout)
     } catch (error) {
     res.status(400).send(error.message)
@@ -45,8 +45,8 @@ const aboutmodel = require ('../schema/about_schema')
             return res.json(error.message)
         }
 
-        const aboutxogta = await aboutmodel.find().sort({_id: -1}).limit(1);
-        if(aboutxogta){
+        const aboutxogta = await aboutmodel.find().sort({'_id': -1}).limit(1);
+        if(aboutxogta.length >0){
             const updateAbout = await aboutmodel.findByIdAndUpdate(
                 aboutxogta[0]._id,
                 {
@@ -55,7 +55,7 @@ const aboutmodel = require ('../schema/about_schema')
                 },
                 {new: true}
             );
-            res.status(200).send({updateAbout});
+            res.status(200).send({message:"seceesfully updated"});
 
         }
        
