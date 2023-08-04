@@ -5,10 +5,10 @@ const homestiting = express()
 const homestitingmodel =require('../schema/HomeStiting_schema')
 
 //get
-homestiting.get('',async(req,res)=>{
+ const gethome =async(req,res)=>{
     const gethome =await homestitingmodel.find()
     res.json(gethome)
-})
+}
 
 
 //validation
@@ -32,8 +32,9 @@ const homesvalidate = (homeStdata) =>{
     return homeS.validate(homeStdata)
 }
 //post
-try {
-    homestiting.post('',async(req,res)=>{
+
+    const posthoem =async(req,res)=>{
+        try {
         const{error} = homesvalidate(req.body)
         if(error){
             return res.json(error.message)
@@ -41,12 +42,12 @@ try {
          const posthome = await homestitingmodel(req.body)
         await posthome.save()
         res.status(200).send({message:"sucessfully posted"})
-    })
     
 } catch (error) {
     res.status(400).send(error.message)
 }
 
+    }
 //put
 try {
     homestiting.put('/:id',async(req,res)=>{
