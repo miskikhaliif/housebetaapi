@@ -1,11 +1,10 @@
 const express =require ('express')
 const abouts = express.Router();
-const about =require('../controllers/about_controller')
+const {aboutget ,getByid, postabout,deleteabo} =require('../controllers/about_controller')
 
-abouts.get('/',about)
-abouts.get('/:id',about)
-abouts.post('/',about)
-abouts.put('/:id',about)
-abouts.delete('/:id',about)
+abouts.get('/',aboutget)
+abouts.get('/:id',getByid)
+abouts.post('/',postabout)
+abouts.delete('/:id',deleteabo)
 
 module.exports=abouts;
