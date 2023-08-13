@@ -53,6 +53,9 @@ try {
          const salt= await bcrypt.genSalt(10)
      
          userobj.password= await bcrypt.hash(userobj.password,salt)
+
+         const alluser = await usermodel.find({username:req.body.username})
+         if(alluser.length >0) return res.status(409).send({status:false, message:"this user already exist"})
          
      
          await userobj.save()

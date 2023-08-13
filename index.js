@@ -31,20 +31,22 @@ const service = require('./route/service_route')
 const abouts =require('./route/about_route')
 const contacts =require('./route/contactForm_route')
 const homestitings =require('./route/homestiting_route')
-const login = require ('./controllers/login')
+const logouts = require('./route/loginroute')
+const AuthenticateRoute = require('./route/outhenticationRoute')
+
 
 
 
 app.use("/guryo",guryoos)
 app.use("/image",images)
-app.use("/user",users)
+app.use("/user",AuthenticateRoute(["Admin"]),users)
 app.use("/imageGallery",imag)
 app.use("/client",clint)
 app.use("/service",service)
 app.use("/abouts",abouts)
 app.use("/contact",contacts)
 app.use("/home",homestitings)
-app.use("/login",login)
+app.use("/login",logouts)
 
 
 
